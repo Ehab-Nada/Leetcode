@@ -5,27 +5,25 @@
  * @return {number}
  */
 var nearestValidPoint = function(x, y, points) {
-    let distance=null;
-let result=[];
-points.forEach(p=>{
-if(p[0] === x || p[1] === y) {
+    let min= {
+        d:-1,
+        i:-1,
+    }
+    let dis;
+    for(let i=0 ; i<points.length ; i++){
+        if(x===points[i][0] || y===points[i][1]){
+                   dis = (Math.abs(x-points[i][0])+Math.abs(y-points[i][1]))
+       if(min.i===-1){
+           min.d = dis
+           min.i = i
+       }
+       if(min.d > dis){
+           min.d = dis
+           min.i = i
+       }
+           
+           }
 
- let md= Math.abs(x-p[0]) + Math.abs(y-p[1])
- 
- if(distance === null){
-     distance=md
-     result.push(points.indexOf(p))
- }else if (distance==md){
-     distance=md;
-     result.push(points.indexOf(p));
-     
- }else if (distance>md){
-     distance=md;
-     result=[];
-     result.push(points.indexOf(p));
- }
- }    }
-           )
-return result.length ? Math.min(...result) : -1;
-    
+    }
+    return min.i
 };
